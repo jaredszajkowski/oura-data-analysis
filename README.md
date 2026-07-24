@@ -10,8 +10,10 @@ Scripts and notes for working with a personal [Oura ring](https://ouraring.com/)
 ## Contents
 
 - `extract_session.py` — parse and extract individual Oura workout/session data.
+- `requirements.txt` — dependency manifest (none: `extract_session.py` is Python 3 stdlib-only).
 - `CLAUDE.md` — working notes on the export's layout and CSV format quirks
   (semicolon-delimited, embedded JSON columns, large high-frequency streams, etc.).
+- `LICENSE` — repository license.
 
 ## Data layout (kept local, not in this repo)
 
@@ -19,3 +21,5 @@ Scripts and notes for working with a personal [Oura ring](https://ouraring.com/)
   heart rate, temperature, workouts, …).
 - `data/Subscriptions/` — billing/account records.
 - `data.zip` — the original, unmodified Oura export archive.
+- `sessions/` — per-session workout exports written by `extract_session.py`
+  (include raw GPS tracks / location data).
