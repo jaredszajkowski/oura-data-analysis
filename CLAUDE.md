@@ -5,14 +5,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 Scripts and notes for analyzing a personal Oura ring data export. The repo tracks
-**only code and documentation** — `extract_session.py`, `README.md`, this file, and
-`.gitignore`. The raw export is private health data and is deliberately **kept local
-and gitignored** (`data/`, `data.zip`, `sessions/`, plus `*.csv`/`*.gpx`/`*.pdf`/
-`*.parquet`). Never commit data files.
+**only code and documentation** — `src/extract_session_create_gpx.py`, `README.md`,
+this file, `requirements.txt`, `LICENSE`, and `.gitignore`. The raw export is private
+health data and is deliberately **kept local and gitignored** (`data/`, `data.zip`,
+`sessions/`, plus `*.csv`/`*.gpx`/`*.pdf`/`*.parquet`). Never commit data files.
 
-There is no build system, no dependencies, and no test suite. `extract_session.py` is
-**stdlib-only** (Python 3) — no venv or `pip install` needed. Any further analysis is
-ad-hoc Python/pandas or shell that you create as needed.
+There is no build system, no dependencies, and no test suite. The script is
+**stdlib-only** (Python 3) — `requirements.txt` lists nothing; no venv or `pip install`
+needed. Any further analysis is ad-hoc Python/pandas or shell that you create as needed.
 
 ## The data (local, not committed)
 
@@ -26,16 +26,19 @@ ad-hoc Python/pandas or shell that you create as needed.
 - Data spans roughly **2025-04 through the export date** (~2026-07). Full historical
   dump, not incremental.
 
-## extract_session.py
+## src/extract_session_create_gpx.py
 
 Extracts everything recorded for one Oura workout and builds an enriched GPS track.
+Run it **from the repo root** (it derives `data/` from its own location via `REPO_ROOT
+= dirname(dirname(__file__))`, so it works regardless of cwd):
 
 ```bash
-python3 extract_session.py <workout_id> [--outdir sessions]
+python3 src/extract_session_create_gpx.py <workout_id> [--outdir <dir>]
 ```
 
 `<workout_id>` is a UUID from `data/App Data/workout.csv` (run with a bad id and it
-prints example ids). For each workout it writes `sessions/<id>/<id>.{gpx,json,md}`:
+prints example ids). Output defaults to `<repo>/sessions/`; for each workout it writes
+`sessions/<id>/<id>.{gpx,json,md}`:
 
 - **`.gpx`** — a GPX 1.1 track from `rawlocation.csv` (the only file with GPS), with
   nearest-in-time heart rate, cadence, and skin temperature attached as Garmin

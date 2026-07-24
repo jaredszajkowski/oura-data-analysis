@@ -18,7 +18,7 @@ uses local offsets while the streams use UTC ``Z``.
 
 Stdlib only. Usage::
 
-    python3 extract_session.py <workout_id> [--outdir sessions]
+    python3 src/extract_session_create_gpx.py <workout_id> [--outdir sessions]
 """
 
 import argparse
@@ -36,7 +36,9 @@ import xml.sax.saxutils as sax
 csv.field_size_limit(10 * 1024 * 1024)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(HERE, "data", "App Data")
+# The export and outputs live at the repo root; this script sits in src/.
+REPO_ROOT = os.path.dirname(HERE)
+DATA_DIR = os.path.join(REPO_ROOT, "data", "App Data")
 WORKOUT_CSV = os.path.join(DATA_DIR, "workout.csv")
 
 # How close (seconds) a sensor sample must be to a trackpoint to be attached.
@@ -634,8 +636,8 @@ def main(argv=None):
     ap.add_argument("workout_id", help="UUID from workout.csv")
     ap.add_argument(
         "--outdir",
-        default=os.path.join(HERE, "sessions"),
-        help="output directory (default: ./sessions)",
+        default=os.path.join(REPO_ROOT, "sessions"),
+        help="output directory (default: <repo>/sessions)",
     )
     args = ap.parse_args(argv)
 
