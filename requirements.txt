@@ -1,0 +1,3 @@
+# No third-party dependencies. extract_session.py uses the Python standard
+# library only (argparse, bisect, csv, datetime, glob, json, os, sys, xml).
+# The standard library is sufficient; nothing to install.
