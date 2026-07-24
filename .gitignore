@@ -1,0 +1,22 @@
+# ---------------------------------------------------------------------------
+# Private health data — NEVER commit. Keep the Oura export local (see CLAUDE.md).
+# ---------------------------------------------------------------------------
+data/
+data.zip
+
+# Per-session workout exports (include raw GPS tracks / location data)
+sessions/
+
+# Common data/output formats, in case any land in the repo root
+*.csv
+*.gpx
+*.pdf
+*.parquet
+
+# Python / tooling cruft
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
