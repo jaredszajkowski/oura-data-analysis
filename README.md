@@ -35,7 +35,7 @@ workout and writes a per-session bundle:
 
 ```bash
 # From the repo root:
-python3 src/extract_session_create_gpx.py <workout_id>
+python src/extract_session_create_gpx.py <workout_id>
 ```
 
 `<workout_id>` is a UUID from `data/App Data/workout.csv`. If you don't have one
@@ -43,7 +43,7 @@ handy, run the script with any invalid id and it prints the total workout count
 plus a few example ids to copy from:
 
 ```bash
-python3 src/extract_session_create_gpx.py bad-id
+python src/extract_session_create_gpx.py bad-id
 ```
 
 For the given workout the script writes `sessions/<id>/<id>.{gpx,json,md}`:
